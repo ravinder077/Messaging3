@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scroll"
+    tools:context="com.liftersheaven.messaging.ListUsers"
+    android:orientation="vertical"
+    android:fillViewport="true"
+    tools:ignore="ExtraText">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/chatusers_toolbar"
+        android:minHeight="?attr/actionBarSize"
+        app:titleTextColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/space" />
+
+
+
+    <ListView
+        android:id="@+id/lstUsers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/chatusers_toolbar"
+        android:layout_above="@+id/btn_create_chat"></ListView>
+
+    <Button
+        android:id="@+id/btn_create_chat"
+        android:text="Create Chat"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/my_button_bg"
+        android:textColor="@android:color/background_dark"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

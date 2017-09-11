@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_chat_message"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.liftersheaven.messaging.ChatMessage">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/chatmessage_toolbar"
+        android:minHeight="?attr/actionBarSize"
+        app:titleTextColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/space"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <LinearLayout
+        android:layout_below="@+id/chatmessage_toolbar"
+        android:id="@+id/dialog_info"
+        android:orientation="horizontal"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_width="match_parent">
+
+
+        <ImageView
+            android:id="@+id/img_online_count"
+            android:layout_width="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/txt_online_count"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+
+
+    <ImageButton
+        android:id="@+id/send"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:background="@android:color/transparent"
+        android:layout_alignParentRight="true"
+        android:padding="4dp"
+        app:srcCompat="@drawable/ic_send_black_24dp" />
+
+    <EditText
+        android:id="@+id/edt_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/send"
+        android:hint=" Type a message"
+        android:background="@drawable/my_button_bg"
+        android:textColorHint="@android:color/background_dark"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <ListView
+        android:id="@+id/messages_list"
+        android:layout_below="@+id/chatmessage_toolbar"
+        android:layout_above="@+id/edt_content"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="16dp"
+        android:layout_marginBottom="16dp"
+        android:stackFromBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"></ListView>
+
+</RelativeLayout>

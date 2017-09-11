@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scroll"
+    tools:context="com.liftersheaven.messaging.More"
+    android:orientation="vertical"
+    android:fillViewport="true"
+    tools:ignore="ExtraText">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/chatcontest_toolbar"
+        android:minHeight="?attr/actionBarSize"
+        app:titleTextColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/space" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/chatcontest_toolbar"
+        android:layout_above="@+id/adView"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:id="@+id/linear">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="We want to bring so much more to this app and we will be able to achieve it with the support from you all! We will also donate $3 for every $10 we receive from revenue, to charities. "
+        android:textSize="20sp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:textStyle="bold"
+        android:id="@+id/textView2"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="19dp" />
+
+    <TextView
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="We will let you all choose whether we should have the contest prize up to a $100 or $1,000. If the majority chooses $1,000, we won't be able to pick many winners as often as we could if the prize is $100. Go choose on our Facebook page! Here's the link"
+        android:layout_marginTop="24dp"
+        android:textStyle="bold"
+        android:id="@+id/textView3"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Once we start getting enough user's, we will have another contest for designers, so if you send in designs and we like what we receive you will be given the option to either join our designer team or just accept money for the design"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/textView3"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>
+</ScrollView>
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-5227030558700264/1140117430">
+    </com.google.android.gms.ads.AdView>
+    </RelativeLayout>
