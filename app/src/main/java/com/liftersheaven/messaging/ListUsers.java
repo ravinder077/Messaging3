@@ -3,6 +3,7 @@ package com.liftersheaven.messaging;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
@@ -43,7 +44,7 @@ public class ListUsers extends AppCompatActivity {
 
     ListView lstUsers;
     Button btnCreate;
-
+    public Context context=null;
 
     String mode="";
     QBChatDialog qbChatDialog;
@@ -53,7 +54,7 @@ public class ListUsers extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_users);
-
+        context=getBaseContext();
         Toolbar toolbar = (Toolbar)findViewById(R.id.chatusers_toolbar);
         toolbar.setTitle("Users");
         setSupportActionBar(toolbar);
@@ -345,6 +346,92 @@ public class ListUsers extends AppCompatActivity {
             }
         });
     }
+
+    public void getUserById(String  ls)
+    {
+
+        QBPagedRequestBuilder pagedRequestBuilder = new QBPagedRequestBuilder();
+        pagedRequestBuilder.setPage(1);
+        pagedRequestBuilder.setPerPage(10);
+
+        Bundle params = new Bundle();
+
+        ArrayList<QBUser> users = null;
+        try {
+            users = QBUsers.getUsersByFullName("ravi", pagedRequestBuilder, params).perform();
+        } catch (QBResponseException e) {
+            e.printStackTrace();
+        }
+
+        if(users != null){
+            System.err.println(">>> Users: " + users.toString());
+            System.err.println( "currentPage: " + params.getInt(Consts.CURR_PAGE));
+            System.err.println( "perPage: " + params.getInt(Consts.PER_PAGE));
+            System.err.println( "totalPages: " + params.getInt(Consts.TOTAL_ENTRIES));
+        }
+    }
+
+
+
+    private class FetchUserByName extends AsyncTask<String ,String,ArrayList<QBUser>>
+    {
+
+        @Override
+        protected ArrayList<QBUser> doInBackground(String... params1) {
+
+            QBPagedRequestBuilder pagedRequestBuilder = new QBPagedRequestBuilder();
+            pagedRequestBuilder.setPage(1);
+            pagedRequestBuilder.setPerPage(10);
+
+            Bundle params = new Bundle();
+
+            ArrayList<QBUser> users = null;
+            try {
+                users = QBUsers.getUsersByFullName(params1[0], pagedRequestBuilder, params).perform();
+            } catch (QBResponseException e) {
+                e.printStackTrace();
+            }
+
+            if(users != null){
+                System.err.println(">>> Users: " + users.toString());
+                System.err.println( "currentPage: " + params.getInt(Consts.CURR_PAGE));
+                System.err.println( "perPage: " + params.getInt(Consts.PER_PAGE));
+                System.err.println( "totalPages: " + params.getInt(Consts.TOTAL_ENTRIES));
+            }
+
+            return users ;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<QBUser> result) {
+
+
+            try {
+                System.err.println("found userare");
+                System.err.println("found userare" + result);
+                if (result != null) {
+                    ListUsersAdapter adapter = new ListUsersAdapter(getBaseContext(), result);
+                    lstUsers.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                } else {
+                   // Toast.makeText(getBaseContext(), "No Users Found ", Toast.LENGTH_SHORT).show();
+                }
+            }
+            catch (Exception e)
+{
+
+    e.printStackTrace();
+}
+        }
+
+
+
+
+
+    }
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -370,6 +457,10 @@ public class ListUsers extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
 
+
+                FetchUserByName ss=new FetchUserByName();
+                ss.execute(query);
+
                 return false;
             }
 
@@ -380,6 +471,15 @@ public class ListUsers extends AppCompatActivity {
 
                 //  cardFriendFragment.myFilter(newText);
                 // System.err.println("qbUserSearch"+qbUserSearch);
+
+
+
+
+                //getUserById("helloxz");
+
+
+
+
                 for (QBUser user : qbUserSearch){
 
                     System.err.println("searchuserid  "+user.getLogin());
@@ -394,9 +494,10 @@ public class ListUsers extends AppCompatActivity {
                     }
                 }
 
-                ListUsersAdapter adapter = new ListUsersAdapter(getBaseContext(),qbUserArrayListSearch);
+               ListUsersAdapter adapter = new ListUsersAdapter(getBaseContext(),qbUserArrayListSearch);
                 lstUsers.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+               adapter.notifyDataSetChanged();
+
                 /*ListUsersAdapter adapter = new ListUsersAdapter(getBaseContext(),qbUserSearch);
                 adapter.filter(newText,qbUserSearch);
                 System.err.println("Searched Text "+newText);*/

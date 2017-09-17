@@ -144,7 +144,14 @@ try {
         System.out.println("Column22   " + Column22);
         Toast.makeText(getBaseContext(), "Signing as "+Column11, Toast.LENGTH_SHORT).show();
 
-        QBUser qbUser = new QBUser(Column11, Column22);
+
+
+        QBUser user = new QBUser();
+        user.setLogin(Column11);
+        user.setPassword(Column22);
+
+
+        /*QBUser qbUser = new QBUser(Column11, Column22);
 
         QBUsers.signIn(qbUser).performAsync(new QBEntityCallback<QBUser>() {
             @Override
@@ -162,7 +169,7 @@ try {
             public void onError(QBResponseException e) {
                 Toast.makeText(getBaseContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
     }
 }
